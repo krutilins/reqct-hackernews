@@ -13,9 +13,9 @@ const NewsList = ({ newsIds }: { newsIds: number[] }) => {
   }, [newsIds])
 
   return (
-    <>
+    <div style={{minHeight: "", display: "flex", alignItems: "center", flexDirection: "column", justifyContent: "space-between"}}>
       {newsList.map(newsItemProps => <NewsItem key={newsItemProps.id} {...newsItemProps} />)}
-    </>
+    </div>
   );
 }
 

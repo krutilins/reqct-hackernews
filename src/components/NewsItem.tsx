@@ -1,26 +1,38 @@
 import React from 'react';
-import {Link} from 'react-router-dom';
+import {Link, useNavigate} from 'react-router-dom';
 import { HackerNewsItem } from '../types/item';
+import { Button, Card } from 'react-bootstrap';
 
 const NewsItem = ({id, title, score, by, time, url, kids}: HackerNewsItem) => {
+  const navigate = useNavigate();
+  
+  const formattedDate = new Date(time).toLocaleDateString('en-us', {
+    year: "numeric",
+    month: "short",
+    day: "numeric"
+  })
+
+  const formattedDiscussion = kids && kids.length ? `Comments ${kids.length}` : 'Discuss';
+
+  const handleNavigate = () => {
+    navigate(`discussion/${id}`);
+  }
+
+  
+
   return (
-    <>
-      <div>
-        <a href={url}>{title}</a>
-      </div>
-      <div>
-        <span>{by}</span>
-        <span>{score}</span>
-        <span>{new Date(time).toLocaleDateString('en-us', {
-          year: "numeric",
-          month: "short",
-          day: "numeric"
-        })}</span>
-        <span>
-          <Link to={`discussion/${id}`}>{kids && kids.length ? `comments ${kids.length}` : 'discuss'}</Link>
-        </span>
-      </div>
-    </>
+    <Card style={{ width: '27rem' }}>
+      <Card.Body>
+        <Card.Title>{title}</Card.Title>
+        <Card.Subtitle>{by}, {formattedDate}, {score} </Card.Subtitle>
+        <div style={{display: "flex", justifyContent: "flex-end"}}>
+          <a href={url}><Button variant="link" size="sm">Link</Button></a>
+          <Button variant="primary" size="sm" onClick={handleNavigate}>
+            {formattedDiscussion}
+          </Button>
+        </div>
+      </Card.Body>
+    </Card>
   );
 }
 

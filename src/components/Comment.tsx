@@ -1,4 +1,5 @@
 import React, { useEffect, useState } from 'react';
+import { Card } from 'react-bootstrap';
 import { getItemById } from '../api/HackerNewsApi';
 import { HackerNewsItem } from '../types/item';
 
@@ -14,13 +15,17 @@ const Comment = ({id}: {id: number}) => {
   }, [id])
 
   return (
-    <>
-      <div>{comment?.by}</div>
-      <div dangerouslySetInnerHTML={{ __html: String(comment && comment.text ? comment.text : '') }}></div>
-      <div>
+    <Card style={{ width: '27rem' }}>
+      <Card.Header>
+        <Card.Title>{comment?.by}</Card.Title>
+      </Card.Header>
+      <Card.Body>
+        <div dangerouslySetInnerHTML={{ __html: String(comment && comment.text ? comment.text : '') }}></div>
+      </Card.Body>
+      <Card.Footer>
         {comment && comment.kids ? comment.kids.map(id => <Comment key={id} id={id} />) : ''}
-      </div>
-    </>
+      </Card.Footer>
+    </Card>
   )
 }
 

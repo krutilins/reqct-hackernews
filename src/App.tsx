@@ -1,28 +1,35 @@
 import React from 'react';
 import NewsListPage from './components/NewsListPage';
 import DiscussionPage from './components/DiscussionPage';
-
+import Logo from './logo.svg';
 import {
   BrowserRouter, 
   Link,
   Route,
   Routes,
 } from "react-router-dom";
+import { Container, Navbar } from 'react-bootstrap';
 
 function App() {
   return (
     <BrowserRouter>
       <div>
-        <nav>
-          <ul>
-            <li>
-              <Link to="/discussion">Discussion</Link>
-            </li>
-            <li>
-              <Link to="/">Home</Link>
-            </li>
-          </ul>
-        </nav>
+        <Navbar bg="dark" variant="dark">
+          <Container>
+              <Link to="/">
+                <Navbar.Brand href="#home">
+                  <img
+                    alt=""
+                    src={Logo}
+                    width="40"
+                    height="40"
+                    className="d-inline-block align-top"
+                  />{' '}
+                  Hacker News
+                </Navbar.Brand>
+              </Link>
+          </Container>
+        </Navbar>
 
         <Routes>
           <Route path="/" element={<NewsListPage />}>

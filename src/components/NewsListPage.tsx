@@ -1,4 +1,5 @@
 import React, { useEffect, useState } from 'react';
+import { Button, Card, Pagination, Stack } from 'react-bootstrap';
 import { Outlet } from 'react-router-dom';
 import { getTopNewsIds } from '../api/HackerNewsApi';
 import NewsList from './NewsList';
@@ -36,10 +37,18 @@ const NewsListPage = () => {
 
   return (
     <>
+      <div style={{display: "flex", justifyContent: "center", margin: "10px"}}>
+        <Pagination size="lg">
+          <Pagination.Item onClick={handlePrevious}>Previous</Pagination.Item>
+          <Pagination.Item onClick={handleNext}>Next</Pagination.Item>
+        </Pagination>
+      </div>
       <NewsList newsIds={newsIds}/>
-      <div>
-        <button onClick={handlePrevious}>previous</button>
-        <button onClick={handleNext}>next</button>
+      <div style={{display: "flex", justifyContent: "center"}}>
+        <Pagination size="lg">
+          <Pagination.Item onClick={handlePrevious}>Previous</Pagination.Item>
+          <Pagination.Item onClick={handleNext}>Next</Pagination.Item>
+        </Pagination>
       </div>
     </>
   )
