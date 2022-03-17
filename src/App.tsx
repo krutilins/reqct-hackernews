@@ -8,16 +8,23 @@ import {
   Route,
   Routes,
 } from "react-router-dom";
-import { Container, Navbar } from 'react-bootstrap';
+import { Button, Container, Navbar } from 'react-bootstrap';
+import ThemeContext from './context/themes';
+import { useDispatch, useSelector } from 'react-redux';
+import { RootState, ThemeState } from './store';
+import { toggleTheme } from './features/theme/themeSlice';
 
 function App() {
+  const theme = useSelector<RootState>((state) => state.theme) as ThemeState;
+  const dispatch = useDispatch();
+
   return (
     <BrowserRouter>
-      <div>
-        <Navbar bg="dark" variant="dark">
+      <ThemeContext.Provider value={theme}>
+        <Navbar bg="light" variant="light">
           <Container>
               <Link to="/">
-                <Navbar.Brand href="#home">
+                <Navbar.Brand>
                   <img
                     alt=""
                     src={Logo}
@@ -28,6 +35,9 @@ function App() {
                   Hacker News
                 </Navbar.Brand>
               </Link>
+              <Button variant="primary" onClick={() => dispatch(toggleTheme())}>
+                Toggle Theme
+              </Button>
           </Container>
         </Navbar>
 
@@ -39,7 +49,7 @@ function App() {
           </Route>
           <Route path="*" element={<h1>There is nothing to render</h1>}></Route>
         </Routes>
-      </div>
+      </ThemeContext.Provider>
     </BrowserRouter>
   );
 }

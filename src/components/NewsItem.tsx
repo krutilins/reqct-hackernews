@@ -1,9 +1,11 @@
 import React from 'react';
-import {Link, useNavigate} from 'react-router-dom';
+import {useNavigate} from 'react-router-dom';
 import { HackerNewsItem } from '../types/item';
 import { Button, Card } from 'react-bootstrap';
+import ThemeContext from '../context/themes';
 
-const NewsItem = ({id, title, score, by, time, url, kids}: HackerNewsItem) => {
+const NewsItem = (props: HackerNewsItem) => {
+  const {id, title, score, by, time, url, kids} = props;
   const navigate = useNavigate();
   
   const formattedDate = new Date(time).toLocaleDateString('en-us', {
@@ -18,21 +20,24 @@ const NewsItem = ({id, title, score, by, time, url, kids}: HackerNewsItem) => {
     navigate(`discussion/${id}`);
   }
 
-  
 
   return (
-    <Card style={{ width: '27rem' }}>
-      <Card.Body>
-        <Card.Title>{title}</Card.Title>
-        <Card.Subtitle>{by}, {formattedDate}, {score} </Card.Subtitle>
-        <div style={{display: "flex", justifyContent: "flex-end"}}>
-          <a href={url}><Button variant="link" size="sm">Link</Button></a>
-          <Button variant="primary" size="sm" onClick={handleNavigate}>
-            {formattedDiscussion}
-          </Button>
-        </div>
-      </Card.Body>
-    </Card>
+    <ThemeContext.Consumer>
+      {state => (
+          <Card style={{ width: '27rem', background: state.background, color: state.color }}>
+            <Card.Body>
+              <Card.Title>{title}</Card.Title>
+              <Card.Subtitle>{by}, {formattedDate}, {score} </Card.Subtitle>
+              <div style={{display: "flex", justifyContent: "flex-end"}}>
+                <a href={url}><Button variant="link" size="sm">Link</Button></a>
+                <Button variant="primary" size="sm" onClick={handleNavigate}>
+                  {formattedDiscussion}
+                </Button>
+              </div>
+            </Card.Body>
+          </Card>
+      )}
+    </ThemeContext.Consumer>
   );
 }
 

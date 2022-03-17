@@ -17,7 +17,7 @@ const DiscussionPage = () => {
   }, [params]);
 
   return (
-    <div>
+    <div style={{width: "70%", margin: "0 auto"}}>
       {commentsIds.map(id => <Comment key={id} id={id} />)}
     </div>
   )

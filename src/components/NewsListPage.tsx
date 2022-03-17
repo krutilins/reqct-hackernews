@@ -1,55 +1,32 @@
 import React, { useEffect, useState } from 'react';
-import { Button, Card, Pagination, Stack } from 'react-bootstrap';
-import { Outlet } from 'react-router-dom';
+import { useDispatch, useSelector } from 'react-redux';
 import { getTopNewsIds } from '../api/HackerNewsApi';
+import { setHasNext } from '../features/pagination/paginationSlice';
+import { RootState } from '../store';
 import NewsList from './NewsList';
+import StructuredPagination from './StructuredPagination';
 
 const NewsListPage = () => {
   const [newsIds, setNewsIds] = useState<number[]>([]);
 
-  const [skip, setSkip] = useState(0);
-  const [take, setTake] = useState(10);
-  const [hasNext, setHasNext] = useState<boolean>(true);
+  const dispatch = useDispatch()
 
-  const [error, setError] = useState<string>('');
+  const skip = useSelector<RootState, number>(state => state.pagination.skip);
+  const take = useSelector<RootState, number>(state => state.pagination.take);
 
   useEffect(() => {
     getTopNewsIds()
       .then(((data: number[]) => {
-        setHasNext(Boolean(data[skip + take + 1]));
+        dispatch(setHasNext(Boolean(data[skip + take + 1])));
         setNewsIds(data.slice(skip, skip + take));
-      }))
-      .catch((error) => {
-        setError(error);
-      })
+      }));
   }, [skip, take])
-
-  const handleNext = () => {
-    const assumedNextValue = skip + take;
-    setSkip(hasNext ? assumedNextValue : skip);
-  }
-
-  const handlePrevious = () => {
-    const assumedPreviousValue = skip - take;
-    const minAvailable = 0;
-    setSkip(assumedPreviousValue < minAvailable ? minAvailable : assumedPreviousValue);
-  }
 
   return (
     <>
-      <div style={{display: "flex", justifyContent: "center", margin: "10px"}}>
-        <Pagination size="lg">
-          <Pagination.Item onClick={handlePrevious}>Previous</Pagination.Item>
-          <Pagination.Item onClick={handleNext}>Next</Pagination.Item>
-        </Pagination>
-      </div>
+      <StructuredPagination></StructuredPagination>
       <NewsList newsIds={newsIds}/>
-      <div style={{display: "flex", justifyContent: "center"}}>
-        <Pagination size="lg">
-          <Pagination.Item onClick={handlePrevious}>Previous</Pagination.Item>
-          <Pagination.Item onClick={handleNext}>Next</Pagination.Item>
-        </Pagination>
-      </div>
+      <StructuredPagination></StructuredPagination>
     </>
   )
 }
