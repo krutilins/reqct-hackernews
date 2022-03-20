@@ -8,17 +8,11 @@ export const paginationSlice = createSlice({
   },
   name: 'pagination',
   reducers: {
-    setSkip: (state, action) => {
-      return { ...state, skip: action.payload }
-    },
-    setState: (state, action) => {
-      return { ...state, take: action.payload }
-    },
-    setHasNext: (state, action) => {
-      return { ...state, hasNext: action.payload }
-    }
-  }
-})
+    setSkip: (state, action) => ({ ...state, skip: action.payload }),
+    setState: (state, action) => ({ ...state, take: action.payload }),
+    setHasNext: (state, action) => ({ ...state, hasNext: action.payload }),
+  },
+});
 
 export const { setSkip, setState, setHasNext } = paginationSlice.actions;
 

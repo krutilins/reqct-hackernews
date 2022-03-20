@@ -1,13 +1,13 @@
-import React from "react";
+import React from 'react';
 
 export const themes = {
   light: {
-    color: "black",
+    color: 'black',
     foreground: '#000000',
     background: '#eeeeee',
   },
   dark: {
-    color: "white",
+    color: 'white',
     foreground: '#ffffff',
     background: '#222222',
   },

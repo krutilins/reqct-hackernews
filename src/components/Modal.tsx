@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { ReactNode } from 'react';
 import styled from 'styled-components';
 import Portal from './Portal';
 
@@ -51,64 +51,52 @@ const Content = styled.div`
   border-radius: 2px;
 `;
 
-const Modal = (props: {children: any, open: any, onClose: any, locked: any}) => {
-  // set up active state
+function Modal(props: {children: ReactNode, open: any, onClose: any, locked: any}) {
   const [active, setActive] = React.useState(false);
-  // get spread props out variables
   const { open, onClose, locked } = props;
-  // Make a reference to the backdrop
   const backdrop = React.useRef(null);
 
-  // on mount
   React.useEffect(() => {
-    // get dom element from backdrop
     const current = backdrop.current as any;
-    // when transition ends set active state to match open prop
     const transitionEnd = () => setActive(open);
-    // when esc key press close modal unless locked
     const keyHandler = (e: any) => !locked && [27].indexOf(e.which) >= 0 && onClose();
-    // when clicking the backdrop close modal unless locked
     const clickHandler = (e: any) => !locked && e.target === current && onClose();
 
-    // if the backdrop exists set up listeners
     if (current) {
-      current?.addEventListener("transitionend", transitionEnd);
-      current?.addEventListener("click", clickHandler);
-      window.addEventListener("keyup", keyHandler);
+      current?.addEventListener('transitionend', transitionEnd);
+      current?.addEventListener('click', clickHandler);
+      window.addEventListener('keyup', keyHandler);
     }
 
-    // if open props is true add inert to #root
-    // and set active state to true
     if (open) {
       window.setTimeout(() => {
         (document?.activeElement as HTMLElement).blur();
         setActive(open);
-        document?.querySelector("#root")?.setAttribute("inert", "true");
+        document?.querySelector('#root')?.setAttribute('inert', 'true');
       }, 10);
     }
 
-    // on unmount remove listeners
     return () => {
       if (current) {
-        current.removeEventListener("transitionend", transitionEnd);
-        current.removeEventListener("click", clickHandler);
+        current.removeEventListener('transitionend', transitionEnd);
+        current.removeEventListener('click', clickHandler);
       }
 
-      document.querySelector("#root")?.removeAttribute("inert");
-      window.removeEventListener("keyup", keyHandler);
+      document.querySelector('#root')?.removeAttribute('inert');
+      window.removeEventListener('keyup', keyHandler);
     };
   }, [open, locked, onClose]);
 
   return (
-    <React.Fragment>
+    <>
       {(open || active) && (
-        <Portal className="modal-portal" parent={document.getElementById("portal-root")}>
-          <Backdrop ref={backdrop} className={active && open && "active"}>
+        <Portal className="modal-portal" parent={document.getElementById('portal-root')}>
+          <Backdrop ref={backdrop} className={active && open && 'active'}>
             <Content className="modal-content">{props.children}</Content>
           </Backdrop>
         </Portal>
       )}
-    </React.Fragment>
+    </>
   );
 }
 

@@ -1,12 +1,12 @@
 {
     "env": {
         "browser": true,
-        "es2021": true
+        "es2021": true,
+        "node": true
     },
     "extends": [
-        "eslint:recommended",
         "plugin:react/recommended",
-        "plugin:@typescript-eslint/recommended"
+        "airbnb"
     ],
     "parser": "@typescript-eslint/parser",
     "parserOptions": {
@@ -18,7 +18,45 @@
     },
     "plugins": [
         "react",
-        "@typescript-eslint"
+        "@typescript-eslint",
+        "unused-imports"
     ],
-    "rules": {}
+    "rules": {
+        "import/extensions": [
+            "error",
+            "ignorePackages",
+            {
+                "ts": "never",
+                "tsx": "never"
+            }
+        ],
+        "react/jsx-filename-extension": [
+            "warn",
+            {
+                "extensions": [
+                    ".tsx"
+                ]
+            }
+        ],
+        "import/no-extraneous-dependencies": [
+            "error",
+            {
+                "devDependencies": true
+            }
+        ],
+        "linebreak-style": "off",
+        "react/jsx-no-useless-fragment": [
+            "error",
+            {
+                "allowExpressions": true
+            }
+        ],
+        "react/destructuring-assignment": "off",
+        "react/jsx-props-no-spreading": "off",
+    },
+    "settings": {
+        "import/resolver": {
+            "typescript": {}
+        }
+    }
 }

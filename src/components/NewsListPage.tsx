@@ -6,13 +6,13 @@ import { RootState } from '../store';
 import NewsList from './NewsList';
 import StructuredPagination from './StructuredPagination';
 
-const NewsListPage = () => {
+function NewsListPage() {
   const [newsIds, setNewsIds] = useState<number[]>([]);
 
-  const dispatch = useDispatch()
+  const dispatch = useDispatch();
 
-  const skip = useSelector<RootState, number>(state => state.pagination.skip);
-  const take = useSelector<RootState, number>(state => state.pagination.take);
+  const skip = useSelector<RootState, number>((state) => state.pagination.skip);
+  const take = useSelector<RootState, number>((state) => state.pagination.take);
 
   useEffect(() => {
     getTopNewsIds()
@@ -20,15 +20,15 @@ const NewsListPage = () => {
         dispatch(setHasNext(Boolean(data[skip + take + 1])));
         setNewsIds(data.slice(skip, skip + take));
       }));
-  }, [skip, take])
+  }, [skip, take]);
 
   return (
     <>
-      <StructuredPagination></StructuredPagination>
-      <NewsList newsIds={newsIds}/>
-      <StructuredPagination></StructuredPagination>
+      <StructuredPagination />
+      <NewsList newsIds={newsIds} />
+      <StructuredPagination />
     </>
-  )
+  );
 }
 
 export default NewsListPage;
