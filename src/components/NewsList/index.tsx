@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react';
-import { getNewsByIds } from '../api/HackerNewsApi';
-import { HackerNewsItem } from '../types/item';
-import NewsItem from './NewsItem';
+import { getNewsByIds } from '../../api/HackerNewsApi';
+import { HackerNewsItem } from '../../types/item';
+import NewsItem from '../NewsItem';
 
 function NewsList({ newsIds }: { newsIds: number[] }) {
   const [newsList, setNewsList] = useState<HackerNewsItem[]>([]);

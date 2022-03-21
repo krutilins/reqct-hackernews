@@ -1,12 +1,12 @@
 import React, { useEffect, useState } from 'react';
 import { Button, Card } from 'react-bootstrap';
 import { useDispatch, useSelector } from 'react-redux';
-import { getItemById } from '../api/HackerNewsApi';
-import ThemeContext from '../context/themes';
-import { toggleByKey } from '../features/collapseExpandComment/commentExpand';
-import { RootState } from '../store';
-import { HackerNewsItem } from '../types/item';
-import Modal from './Modal';
+import Modal from '../Modal';
+import { getItemById } from '../../api/HackerNewsApi';
+import { HackerNewsItem } from '../../types/item';
+import { RootState } from '../../store';
+import { toggleByKey } from '../../features/collapseExpandComment/commentExpand';
+import { ThemeContext } from 'styled-components';
 
 function Comment({ id }: {id: number}) {
   const [isOpen, setIsOpen] = React.useState(false);

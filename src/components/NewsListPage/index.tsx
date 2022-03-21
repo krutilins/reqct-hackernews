@@ -1,10 +1,10 @@
 import React, { useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import { getTopNewsIds } from '../api/HackerNewsApi';
-import { setHasNext } from '../features/pagination/paginationSlice';
-import { RootState } from '../store';
-import NewsList from './NewsList';
-import StructuredPagination from './StructuredPagination';
+import { getTopNewsIds } from '../../api/HackerNewsApi';
+import { setHasNext } from '../../features/pagination/paginationSlice';
+import { RootState } from '../../store';
+import NewsList from '../NewsList';
+import StructuredPagination from '../StructuredPagination';
 
 function NewsListPage() {
   const [newsIds, setNewsIds] = useState<number[]>([]);

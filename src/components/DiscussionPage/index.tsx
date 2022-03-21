@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import { useParams } from 'react-router-dom';
-import { getItemById } from '../api/HackerNewsApi';
-import Comment from './Comment';
+import { getItemById } from '../../api/HackerNewsApi';
+import Comment from '../Comment';
 
 function DiscussionPage() {
   const [commentsIds, setCommentsIds] = useState<number[]>([]);

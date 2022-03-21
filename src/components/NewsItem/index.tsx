@@ -1,8 +1,8 @@
 import React from 'react';
 import { useNavigate } from 'react-router-dom';
 import { Button, Card } from 'react-bootstrap';
-import { HackerNewsItem } from '../types/item';
-import ThemeContext from '../context/themes';
+import { HackerNewsItem } from '../../types/item';
+import ThemeContext from '../../context/themes';
 
 function NewsItem(props: HackerNewsItem) {
   const {

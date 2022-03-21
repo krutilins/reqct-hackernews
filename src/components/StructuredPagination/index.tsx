@@ -1,8 +1,8 @@
 import React from 'react';
 import { Pagination } from 'react-bootstrap';
 import { useDispatch, useSelector } from 'react-redux';
-import { setSkip } from '../features/pagination/paginationSlice';
-import { RootState } from '../store';
+import { setSkip } from '../../features/pagination/paginationSlice';
+import { RootState } from '../../store';
 
 function StructuredPagination() {
   const skip = useSelector<RootState, number>((state) => state.pagination.skip);
