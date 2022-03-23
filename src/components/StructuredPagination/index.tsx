@@ -3,6 +3,7 @@ import { Pagination } from 'react-bootstrap';
 import { useDispatch, useSelector } from 'react-redux';
 import { setSkip } from '../../features/pagination/paginationSlice';
 import { RootState } from '../../store';
+import './style.scss';
 
 function StructuredPagination() {
   const skip = useSelector<RootState, number>((state) => state.pagination.skip);
@@ -23,7 +24,7 @@ function StructuredPagination() {
   };
 
   return (
-    <div style={{ display: 'flex', justifyContent: 'center', margin: '10px' }}>
+    <div className="pagination-wrapper">
       <Pagination size="lg">
         <Pagination.Item onClick={handlePrevious}>Previous</Pagination.Item>
         <Pagination.Item onClick={handleNext}>Next</Pagination.Item>

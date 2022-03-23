@@ -21,7 +21,7 @@
     "test": "react-scripts test",
     "test:cypress": "cypress open",
     "eject": "react-scripts eject",
-    "lint": "eslint src/*",
+    "lint": "eslint --ext .ts,.js,.tsx,.jsx ./src/*",
     "lint:fix": "eslint src/* --fix",
     "lint:quiet": "eslint src/* --quiet"
   },
@@ -59,6 +59,8 @@
     "eslint-plugin-jsx-a11y": "^6.5.1",
     "eslint-plugin-react": "^7.29.4",
     "eslint-plugin-react-hooks": "^4.3.0",
-    "eslint-plugin-unused-imports": "^2.0.0"
+    "eslint-plugin-unused-imports": "^2.0.0",
+    "sass": "^1.49.9",
+    "ts-jest": "^27.1.3"
   }
 }
