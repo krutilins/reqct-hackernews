@@ -3,6 +3,8 @@ import { useParams } from 'react-router-dom';
 import { getItemById } from '../../api/HackerNewsApi';
 import Comment from '../Comment';
 
+export const gg = () => 'asdf';
+
 function DiscussionPage() {
   const [commentsIds, setCommentsIds] = useState<number[]>([]);
   const params = useParams();

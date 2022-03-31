@@ -42,7 +42,7 @@ function Modal(props: {children: ReactNode, open: any, onClose: any, locked: any
     <>
       {(open || active) && (
         <Portal className="modal-portal" parent={document.getElementById('portal-root')}>
-          <Backdrop ref={backdrop} className={active && open && 'active'}>
+          <Backdrop data-cy="modal" ref={backdrop} className={active && open && 'active'}>
             <Content className="modal-content">{props.children}</Content>
           </Backdrop>
         </Portal>
