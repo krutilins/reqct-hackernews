@@ -40,7 +40,7 @@ function NewsItem(props: HackerNewsItem) {
             </Card.Subtitle>
             <div style={{ display: 'flex', justifyContent: 'flex-end' }}>
               <a href={url}><Button variant="link" size="sm">Link</Button></a>
-              <Button variant="primary" size="sm" onClick={handleNavigate}>
+              <Button data-cy="discuss-button" variant="primary" size="sm" onClick={handleNavigate}>
                 {formattedDiscussion}
               </Button>
             </div>
